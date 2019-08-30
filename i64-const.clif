@@ -1,0 +1,6 @@
+target i686
+function u0:1() -> i64 system_v {
+ebb0:
+    v2 = iconst.i64 0
+    return v2
+}
