@@ -1,0 +1,32 @@
+ INFO 2019-08-30T09:45:38Z: baldrdash: Compiled function: function u0:0(i32 [0], i32 [4], i32 vmctx [%rsi]) -> f64 [%xmm0] baldrdash_system_v {
+    ss0 = incoming_arg 4, offset 0
+    ss1 = incoming_arg 4, offset 4
+
+                                ebb0(v4: i32 [ss0], v5: i32 [ss1], v1: i32):
+[-,-]                               v0 = iconcat v4, v5
+@003d [-,-]                         v6 = icmp_imm slt v0, 0
+@003d [Op1t8jccd_long#85]           brnz v6, ebb3
+@003d [Op1jmpb#eb]                  jump ebb2
+
+                                ebb2:
+@003d [-,-]                         v7 = fcvt_from_sint.f64 v0
+@003d [Op1jmpb#eb]                  jump ebb4(v7)
+
+                                ebb3:
+@003d [-,-]                         v8 = ushr_imm.i64 v0, 1
+@003d [-,-]                         v9 = band_imm.i64 v0, 1
+@003d [-,-,-]                       v13, v14 = isplit v8
+@003d [-,-,-]                       v15, v16 = isplit v9
+@003d [Op1rr#09,-]                  v17 = bor v13, v15
+@003d [Op1rr#09,-]                  v18 = bor v14, v16
+@003d [-,-]                         v10 = iconcat v17, v18
+@003d [-,-]                         v11 = fcvt_from_sint.f64 v10
+@003d [Mp2fa#758,-]                 v12 = fadd v11, v11
+@003d [Op1jmpb#eb]                  jump ebb4(v12)
+
+                                ebb4(v3: f64):
+@003e [Op1jmpb#eb]                  jump ebb1(v3)
+
+                                ebb1(v2: f64):
+@003e [-]                           fallthrough_return v2
+}
